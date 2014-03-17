@@ -1,15 +1,21 @@
-all: Main
+CC=clang++
+CFLAGS=--std=c++11 -g -Wall -Wfatal-errors
 
-Main: main.cpp location.o tile.o
-	clang++  --std=c++11 -g -Wall main.cpp location.o tile.o -o Main
+all: SevenBridges Board.o Tile.o Location.o
 
-location.o: Location.cpp Location.h
-	clang++ --std=c++11 -g -Wall Location.cpp -c -o location.o
+SevenBridges: SevenBridges.cpp Board.o Tile.o Location.o
+	$(CC) $(CFLAGS) SevenBridges.cpp Board.o Tile.o Location.o -o SevenBridges
 
-tile.o: Tile.cpp Tile.h
-	clang++ --std=c++11 -g -Wall Tile.cpp -c -o tile.o
+Board.o: Board.h Board.cpp
+	$(CC) $(CFLAGS) -c Board.cpp -o Board.o
+
+Tile.o: Tile.h Tile.cpp
+	$(CC) $(CFLAGS) -c Tile.cpp -o Tile.o
+
+Location.o: Location.h Location.cpp
+	$(CC) $(CFLAGS) -c Location.cpp -o Location.o
 
 .PHONY: clean
 
 clean:
-	rm Main *.o
+	rm SevenBridges *.o

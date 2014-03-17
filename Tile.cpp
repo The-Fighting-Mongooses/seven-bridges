@@ -12,6 +12,7 @@
  **************************************/
 
 #include "Tile.h"
+#include "Location.h"
 #include "ANSI.h"
 
 /* Default constructor.  May be removed later. */
@@ -49,19 +50,19 @@ string Tile::repr() const
   {
     case UNUSED:
     default:
-      representation += ansi_blue_bg;
+      representation += ANSI::blue_bg;
       break;
 
     case CURRENT:
-      representation += ansi_yellow_bg;
+      representation += ANSI::yellow_bg;
       break;
 
     case USED:
-      representation += ansi_red_bg;
+      representation += ANSI::red_bg;
       break;
   }
 
-  representation += " " + ansi_normal;
+  representation += " " + ANSI::normal;
   return representation;
 }
 

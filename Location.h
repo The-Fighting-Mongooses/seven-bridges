@@ -20,6 +20,8 @@ using namespace std;
 
 class Location
 {
+  friend class Board;
+
   protected:
     int m_x;
     int m_y;
@@ -35,6 +37,11 @@ class Location
 
     /* INTERFACE */
     virtual string repr() const;
+
+    inline Location north() const { return Location(m_x, m_y-1); }
+    inline Location east() const  { return Location(m_x+1, m_y); }
+    inline Location south() const { return Location(m_x, m_y+1); }
+    inline Location west() const  { return Location(m_x-1, m_y); }
 };
 
 #endif /*_LOCATION_H_*/
