@@ -38,6 +38,7 @@ class Tile : public Location
     void flip();            // Mark the tile as used.
     void make_current();    // Mark this as the players current position.
     char repr() const;      // Return a character representation of this Tile's state.
+    void reset();           // Mark the tile as unused.
 };
 
 #endif /*_TILE_H_*/

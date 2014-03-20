@@ -1,10 +1,13 @@
 CC=clang++
 CFLAGS=--std=c++11 -g -Wall -Wfatal-errors
 
-all: SevenBridges Board.o Tile.o Location.o
+all: SevenBridges GameEngine.o Board.o Tile.o Location.o
 
-SevenBridges: SevenBridges.cpp Board.o Tile.o Location.o
-	$(CC) $(CFLAGS) SevenBridges.cpp Board.o Tile.o Location.o -o SevenBridges
+SevenBridges: SevenBridges.cpp GameEngine.o Board.o Tile.o Location.o
+	$(CC) $(CFLAGS) SevenBridges.cpp GameEngine.o Board.o Tile.o Location.o -o SevenBridges
+
+GameEngine.o: GameEngine.h GameEngine.cpp
+	$(CC) $(CFLAGS) -c GameEngine.cpp -o GameEngine.o
 
 Board.o: Board.h Board.cpp
 	$(CC) $(CFLAGS) -c Board.cpp -o Board.o

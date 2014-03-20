@@ -31,9 +31,3 @@ bool Location::is_equal_to(const Location& other) const
     return true;
   else return false;
 }
-
-/* Returns a character representation of this Location. */
-char Location::repr() const
-{
-  return '\0';
-}

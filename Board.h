@@ -16,13 +16,15 @@
 
 using namespace std;
 
+//TODO: Check that the pointer logic is correct for m_start+m_player.
+
 class Board
 {
   //friend class Location;
 
   protected:
     vector<vector<Location>> m_board;
-    Location m_start, m_finish, m_player;
+    Tile *m_start, *m_player;
     int m_height, m_width;
 
   public:
@@ -34,11 +36,23 @@ class Board
     // Change the size of the Board.
     void resize_board(const int& x, const int& y);
 
+    // Insert a Location into this Board.
+    void insert(const Location& loc);
+
+    // Move the player based on user input.
+    void update(const char& input);
+    Location& make_adjacent_location(const char& input);
+    void move(const char& input, int& x, int& y);
+
+
     // Determine wether the specified Location is in bounds of the board.
     bool includes(const Location& loc) const;
 
     // Returns the specified Location's character representation.
     char contents_at(const Location& loc) const;
+
+    // Reset the Board so the player can start over.
+    void reset();
 };
 
 #endif /*_BOARD_H_*/

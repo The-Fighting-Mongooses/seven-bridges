@@ -56,3 +56,7 @@ char Tile::repr() const
   }
 }
 
+void Tile::reset()
+{
+  this->m_traversed = UNUSED;
+}

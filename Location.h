@@ -42,13 +42,18 @@ class Location
     // Return an ASCII representation of this Location so that the display has
     // precise information about what it needs to print.  Should be
     // reimplemented in any class that derives from Location.
-    virtual char repr() const;
+    virtual char repr() = 0 const;
+
+    // Reset the location.  Really only useful for a Tile, but it will probably
+    // make it easier for the GameEngine and Board if it can expect an Obstacle
+    // to have this defined.
+    virtual void reset() = 0;
 
     // Return the Location in the specified location.
-    inline Location north() const { return Location(m_x, m_y-1); }
-    inline Location east() const  { return Location(m_x+1, m_y); }
-    inline Location south() const { return Location(m_x, m_y+1); }
-    inline Location west() const  { return Location(m_x-1, m_y); }
+    //inline Location north() const { return Location(m_x, m_y-1); }
+    //inline Location east() const  { return Location(m_x+1, m_y); }
+    //inline Location south() const { return Location(m_x, m_y+1); }
+    //inline Location west() const  { return Location(m_x-1, m_y); }
 };
 
 #endif /*_LOCATION_H_*/
