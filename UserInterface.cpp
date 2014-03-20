@@ -1,5 +1,7 @@
 #include <iostream>
 #include <termios.h>
+//Following include only needed for sleep, in the commented out testing code
+//#include <unistd.h>
 
 #include "UserInterface.h"
 #include "Board.h"
@@ -17,32 +19,34 @@ UserInterface::UserInterface()
     tcsetattr(0, TCSANOW, &term_settings);
 }
 
-void UserInterface::update(Board board)
+void UserInterface::update(Board const & board)
 {
     //TODO print the board <dcp>
 }
 
 char UserInterface::get_key_press()
 {
-    char c;
-    int error = read(0, &c, sizeof(char));
-    if (error < 0) {
-        perror("read");
-    }
-    
-    switch (c) {
-        case 'w':
-        case 'W':
-            return 'w';
-        case 'a':
-        case 'A':
-            return 'a';
-        case 's':
-        case 'S':
-            return 's';
-        case 'd':
-        case 'D':
-            return 'd';
+    while(1) {
+        char c;
+        int error = read(0, &c, sizeof(char));
+        if (error < 0) {
+            perror("read");
+        }
+
+        switch (c) {
+            case 'w':
+            case 'W':
+                return 'w';
+            case 'a':
+            case 'A':
+                return 'a';
+            case 's':
+            case 'S':
+                return 's';
+            case 'd':
+            case 'D':
+                return 'd';
+        }
     }
 }
 
@@ -50,3 +54,15 @@ UserInterface::~UserInterface()
 {
     tcsetattr(0, TCSANOW, &m_old_term_settings);
 }
+
+/*
+int main(int argc, char **argv)
+{
+    UserInterface ui;
+    cout << "Waiting a moment..." << endl;
+    sleep(5);
+    for (int i = 0; i < 5; ++i) {
+        cout << ui.get_key_press() << endl;
+    }
+}
+*/

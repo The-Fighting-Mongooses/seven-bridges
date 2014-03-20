@@ -33,6 +33,6 @@ class UserInterface
          * Returns 'w', 'a', 's', or 'd' (lowercase intended).
          */
         char get_key_press();
-}
+};
 
 #endif //_USERINTERFACE_H_
