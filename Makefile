@@ -3,7 +3,7 @@ CFLAGS=--std=c++11 -g -Wall -Wfatal-errors
 
 all: SevenBridges GameEngine.o Board.o Tile.o Location.o
 
-SevenBridges: SevenBridges.cpp GameEngine.o Board.o Tile.o Location.o
+SevenBridges: SevenBridges.cpp GameEngine.o Board.o Tile.o Location.o Scanner.o UserInterface.o
 	$(CC) $(CFLAGS) SevenBridges.cpp GameEngine.o Board.o Tile.o Location.o -o SevenBridges
 
 GameEngine.o: GameEngine.h GameEngine.cpp
@@ -17,6 +17,12 @@ Tile.o: Tile.h Tile.cpp
 
 Location.o: Location.h Location.cpp
 	$(CC) $(CFLAGS) -c Location.cpp -o Location.o
+
+Scanner.o: Scanner.cpp Scanner.h Location.h Board.h
+	$(CC) $(CFLAGS) -c Scanner.cpp
+
+UserInterface.o: UserInterface.cpp UserInterface.h Board.h
+	$(CC) $(CFLAGS) -c UserInterface.cpp
 
 .PHONY: clean
 
