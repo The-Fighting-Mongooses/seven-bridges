@@ -13,15 +13,19 @@ class Scanner
         /*
          * Create a scanner to read a board from the passed in file name
          */
-        Scanner(String filename);
+        Scanner(string filename);
 
         /*
          * Feed the data from the saved board file into the actual board
          */
-        read(Board board);
+        bool read(Board board);
 
         /*
          * Close any open files
          */
         ~Scanner();
-}
+
+     private:
+         ifstream file;
+};
+#endif 
