@@ -20,7 +20,7 @@ class Board
 {
   //friend class Location;
 
-  protected:
+  private:	
     vector<vector<Location>> m_board;
     Location m_start, m_finish, m_player;
     int m_height, m_width;
