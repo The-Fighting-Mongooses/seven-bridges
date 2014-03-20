@@ -2,6 +2,8 @@
 #define _GAME_ENGINE_H_
 
 #include "Board.h"
+#include "UserInterface.h"
+#include "Scanner.h"
 using namespace std;
 
 class GameEngine
