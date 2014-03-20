@@ -23,7 +23,7 @@ class Board
   //friend class Location;
 
   private:	
-    vector<vector<Location>> m_board;
+    vector<vector<Location> > m_board;
     Tile *m_start, *m_player;
     int m_height, m_width;
 

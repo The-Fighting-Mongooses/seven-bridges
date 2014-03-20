@@ -42,7 +42,7 @@ class Location
     // Return an ASCII representation of this Location so that the display has
     // precise information about what it needs to print.  Should be
     // reimplemented in any class that derives from Location.
-    virtual char repr() = 0 const;
+    virtual char repr() const = 0;
 
     // Reset the location.  Really only useful for a Tile, but it will probably
     // make it easier for the GameEngine and Board if it can expect an Obstacle
