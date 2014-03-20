@@ -5,7 +5,7 @@
  * must find and itraverse a Hamiltonian     *
  * path.                                     *
  *                                           *
- * @author:       William Hollingsworth      *
+ * @author:       TheFightingMongooses       *
  * @version:      0.1                        *
  * @since:        2014-02-05                 *
  *                                           *
@@ -26,6 +26,7 @@ class Tile : public Location
       USED = 2
     };
 
+    // Has this tile been used?
     State m_traversed;
 
   public:
@@ -34,9 +35,9 @@ class Tile : public Location
     Tile(int x, int y);
 
     /* INTERFACE */
-    void flip();
-    void make_current();
-    string repr() const;
+    void flip();            // Mark the tile as used.
+    void make_current();    // Mark this as the players current position.
+    char repr() const;      // Return a character representation of this Tile's state.
 };
 
 #endif /*_TILE_H_*/

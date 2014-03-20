@@ -5,7 +5,7 @@
  * any instance ultimately used in the maze should be of    *
  * one of the derived types.                                *
  *                                                          *
- * @author:             William Hollingsworth               *
+ * @author:             TheFightingMongooses                *
  * @version:            0.1                                 *
  * @since:              2014-02-04                          *
  *                                                          *
@@ -20,6 +20,8 @@ using namespace std;
 
 class Location
 {
+  // Not necessary, but it makes some of the Board methods easier to write
+  // if it has access to the coordinates of its Locations.
   friend class Board;
 
   protected:
@@ -36,8 +38,13 @@ class Location
     bool is_equal_to(const Location& other) const;
 
     /* INTERFACE */
-    virtual string repr() const;
 
+    // Return an ASCII representation of this Location so that the display has
+    // precise information about what it needs to print.  Should be
+    // reimplemented in any class that derives from Location.
+    virtual char repr() const;
+
+    // Return the Location in the specified location.
     inline Location north() const { return Location(m_x, m_y-1); }
     inline Location east() const  { return Location(m_x+1, m_y); }
     inline Location south() const { return Location(m_x, m_y+1); }

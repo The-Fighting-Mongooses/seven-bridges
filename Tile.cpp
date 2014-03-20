@@ -13,7 +13,6 @@
 
 #include "Tile.h"
 #include "Location.h"
-#include "ANSI.h"
 
 /* Default constructor.  May be removed later. */
 Tile::Tile()
@@ -41,28 +40,19 @@ void Tile::make_current()
   this->m_traversed = CURRENT;
 }
 
-/* Returns a string represenation of this Tile. */;
-string Tile::repr() const
+/* Returns a character represenation of this Tile. */;
+char Tile::repr() const
 {
-  string representation = "";
-
+  // Send a char back to the Display class so it can print the appropriate
+  // ASCII to the screen.
   switch (this->m_traversed)
   {
-    case UNUSED:
-    default:
-      representation += ANSI::blue_bg;
-      break;
-
     case CURRENT:
-      representation += ANSI::yellow_bg;
-      break;
-
+      return 'c';
     case USED:
-      representation += ANSI::red_bg;
-      break;
+      return 'u';
+    case UNUSED;
+      return 'x';
   }
-
-  representation += " " + ANSI::normal;
-  return representation;
 }
 
