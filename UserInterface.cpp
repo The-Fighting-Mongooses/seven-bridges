@@ -1,4 +1,5 @@
 #include <iostream>
+#include <termios.h>
 
 #include "UserInterface.h"
 #include "Board.h"
@@ -7,7 +8,13 @@ using namespace std;
 
 UserInterface::UserInterface()
 {
-    //TODO Initialization: Probably more useful when this will be a GUI <dcp>
+    //Save the current terminal settings, then turn off buffering so we don't
+    //have to press enter each time
+    struct termios term_settings;
+    tcgetattr(0, &term_settings);
+    m_old_term_settings = term_settings;
+    term_settings.c_lflag &= ~(ECHO | ICANON);
+    tcsetattr(0, TCSANOW, &term_settings);
 }
 
 void UserInterface::update(Board board)
@@ -17,5 +24,29 @@ void UserInterface::update(Board board)
 
 char UserInterface::get_key_press()
 {
-    //TODO pause and wait for key to be pressed, then return one of wasd <dcp>
+    char c;
+    int error = read(0, &c, sizeof(char));
+    if (error < 0) {
+        perror("read");
+    }
+    
+    switch (c) {
+        case 'w':
+        case 'W':
+            return 'w';
+        case 'a':
+        case 'A':
+            return 'a';
+        case 's':
+        case 'S':
+            return 's';
+        case 'd':
+        case 'D':
+            return 'd';
+    }
+}
+
+UserInterface::~UserInterface()
+{
+    tcsetattr(0, TCSANOW, &m_old_term_settings);
 }

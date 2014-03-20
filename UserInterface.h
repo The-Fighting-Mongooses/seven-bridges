@@ -2,13 +2,20 @@
 #define _USERINTERFACE_H_
 
 #include <iostream>
+#include <termios.h>
+
 #include "Board.h"
+
 using namespace std;
 
 class UserInterface
 {
+    private:
+        //Used to store the old terminal settings so we may restore them
+        struct termios m_old_term_settings;
     public:
         UserInterface();
+        ~UserInterface();
 
         /*
          * The game engine should call this function when the board state
