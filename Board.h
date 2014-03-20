@@ -30,9 +30,15 @@ class Board
     Board();
 
     /* UTILITIES */
+
+    // Change the size of the Board.
     void resize_board(const int& x, const int& y);
+
+    // Determine wether the specified Location is in bounds of the board.
     bool includes(const Location& loc) const;
-    string contents_at(const Location& loc) const;
+
+    // Returns the specified Location's character representation.
+    char contents_at(const Location& loc) const;
 };
 
 #endif /*_BOARD_H_*/

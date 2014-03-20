@@ -27,14 +27,13 @@ void Location::print(ostream& out) const
 /* Determine if this Location is equivalent to another. */
 bool Location::is_equal_to(const Location& other) const
 {
-  if (this->m_x == other.m_x && this->m_y == other.m_y
-      && this->repr() == other.repr()) 
+  if (this->m_x == other.m_x && this->m_y == other.m_y) 
     return true;
   else return false;
 }
 
-/* Returns a string representation of this Location. */
-string Location::repr() const
+/* Returns a character representation of this Location. */
+char Location::repr() const
 {
-  return "";
+  return '\0';
 }
