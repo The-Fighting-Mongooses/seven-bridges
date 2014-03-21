@@ -30,7 +30,6 @@ class Location
 
   public:
     /* CONSTRUCTORS */
-    Location();
     Location(int x, int y);
 
     /* DEBUGGING */
@@ -48,6 +47,8 @@ class Location
     // make it easier for the GameEngine and Board if it can expect an Obstacle
     // to have this defined.
     virtual void reset() = 0;
+
+    virtual ~Location();
 
     // Return the Location in the specified location.
     //inline Location north() const { return Location(m_x, m_y-1); }

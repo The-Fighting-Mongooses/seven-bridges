@@ -30,6 +30,9 @@ void Board::resize_board(const int& x, const int& y)
   for (int i = 0; i < x; ++i)
   {
     this->m_board[i].resize(y);
+    for (int j = 0; j < y; ++j) {
+        m_board.at(i).at(j) = nullptr;
+    }
   }
 
   this->m_width  = x;
@@ -42,7 +45,11 @@ void Board::insert(Location* loc)
   int x = loc->m_x;
   int y = loc->m_y;
 
-  this->m_board[x][y] = loc;
+  if (m_board.at(x).at(y) != nullptr) {
+      delete m_board.at(x).at(y);
+  }
+
+  this->m_board.at(x).at(y) = loc;
 
   // If the location is marked as current, it is the staring location.
   // Move the player here.

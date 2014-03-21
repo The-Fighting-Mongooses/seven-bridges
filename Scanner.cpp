@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include "Scanner.h"
 #include "Board.h"
@@ -32,12 +33,16 @@ bool Scanner::read(string filename)
     int lineno = 0;
 
     ifstream file (filename);
-    cin >> width >> height;
+    file >> width >> height >> ws;
 
     m_board.resize_board(width, height);
 
     while (getline (file,line))
     {
+        if (line.back() == '\n') {
+            line.pop_back();
+        }
+            
         for (int i = 0; i < line.length(); ++i) {
             Location *tmp;
             switch (line.at(i)) {
@@ -53,8 +58,11 @@ bool Scanner::read(string filename)
             }
             m_board.insert(tmp);
         }
+        lineno++;
     }
     //else cout << "Unable to open";
+
+    file.close();
 
     return true;
 }

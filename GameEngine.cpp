@@ -28,6 +28,7 @@ void GameEngine::play()
                 m_ui.update(m_board);
             }
         }
+        board_names.close();
     }
 }
 

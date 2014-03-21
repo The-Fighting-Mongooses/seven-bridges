@@ -32,3 +32,8 @@ bool Location::is_equal_to(const Location& other) const
     return true;
   else return false;
 }
+
+Location::~Location()
+{
+
+}
