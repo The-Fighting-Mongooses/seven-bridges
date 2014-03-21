@@ -22,7 +22,6 @@ string line;
 
 Scanner::Scanner(Board &board) : m_board(board)
 {
-  
 }
 
 bool Scanner::read(string filename)
@@ -31,13 +30,10 @@ bool Scanner::read(string filename)
     //return false;
 
     ifstream file (filename);
-       if (file.is_open())
-       {
           while (getline (file,line))
           {
              cout << line << '\n';
           }
-       }   
        else cout << "Unable to open";
     
        return false;
