@@ -5,13 +5,16 @@
 
 class Obstacle : public Location
 {
-    public:
-        /* Constructors */
-        Obstacle(int x, int y);
+  private:
+    typedef Location super;
 
-        /* Interface */
-        char repr() const;  // Return a character representation of this Obstacle
-        void reset();
+  public:
+    /* Constructors */
+    Obstacle(int x, int y);
+
+    /* Interface */
+    char repr() const;  // Return a character representation of this Obstacle
+    void reset();
 };
 
 #endif // _OBSTACLE_H_
