@@ -24,7 +24,7 @@ void Board::resize_board(const int& x, const int& y)
 }
 
 /* Insert a Location into this Board. */
-void Board::insert(const Location& loc)
+void Board::insert(Location& loc)
 {
   int x = loc.m_x;
   int y = loc.m_y;
@@ -35,32 +35,32 @@ void Board::insert(const Location& loc)
   // Move the player here.
   if (loc.repr() == 'c')
   {
-    this->m_start = &loc;
+    this->m_start = static_cast<Tile*>(&loc);
     this->m_player = this->m_start;
   }
 }
 
 /* Move the player based on user input. */
-void Board::update(const char& input);
+void Board::update(const char& input)
 {
   Location* loc = &(this->make_adjacent_location(input));
-  if (loc->repr() = '#' || loc->repr() == 'u')
+  if (loc->repr() == '#' || loc->repr() == 'u')
     return;
 
   // Flip the tile, and move the player to the new location.
-  this->player->flip();
-  this->player = loc;
-  this->player->make_current();
+  this->m_player->flip();
+  this->m_player = static_cast<Tile*>(loc);
+  this->m_player->make_current();
 }
 
 /* Return the Location in the direction specified. */
 Location& Board::make_adjacent_location(const char& input)
 {
-  int x = player.m_x;
-  int y = player.m_y;
+  int x = m_player->m_x;
+  int y = m_player->m_y;
 
   this->move(input, x, y);
-  return this->board[x][y];
+  return this->m_board[x][y];
 }
 
 /* Move the coordinates in the direction specified. */
@@ -119,14 +119,14 @@ void Board::reset()
   {
     for (int j = 0; j < this->m_height; ++j)
     {
-      this->m_board[x][y].reset();
+      this->m_board[i][j].reset();
     }
   }
 
   // Move the player back to the starting position.
   this->m_player = this->m_start;
 
-  int x = m_player.m_x;
-  int y = m_player.m_y;
-  this->m_board[x][y].make_current();
+  int x = m_player->m_x;
+  int y = m_player->m_y;
+  static_cast<Tile*>(&(this->m_board[x][y]))->make_current();
 }

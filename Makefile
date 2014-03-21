@@ -27,6 +27,7 @@ Scanner.o: Scanner.cpp Scanner.h Location.h Board.h
 UserInterface.o: UserInterface.cpp UserInterface.h Board.h
 	$(CC) $(CFLAGS) -c UserInterface.cpp
 
+
 .PHONY: clean
 
 clean:

@@ -37,7 +37,7 @@ class Board
     void resize_board(const int& x, const int& y);
 
     // Insert a Location into this Board.
-    void insert(const Location& loc);
+    void insert(Location& loc);
 
     // Move the player based on user input.
     void update(const char& input);
