@@ -26,6 +26,15 @@ int Board::get_height() const
 /* Change the size of the board using the specified width and height. */
 void Board::resize_board(const int& x, const int& y)
 {
+  for (int i = 0; i < m_board.size(); ++i) {
+      for (int j = 0; j < m_board.at(i).size(); ++j) {
+          if (m_board.at(i).at(j) != nullptr) {
+              delete m_board.at(i).at(j);
+          }
+      }
+      m_board.at(i).clear();
+  }
+  m_board.clear();
   this->m_board.resize(x);
   for (int i = 0; i < x; ++i)
   {
