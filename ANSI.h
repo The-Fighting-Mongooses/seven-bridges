@@ -1,7 +1,7 @@
 /*************************************************
  * Definitions for common ANSI escape sequences. *
  *                                               *
- * @author:         William Holltingsworth       *
+ * @author:         TheFightingMongooses         *
  * @version:        0.1                          *
  * @since:          2014-02-04                   *
  *                                               *
