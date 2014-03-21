@@ -136,3 +136,16 @@ void Board::reset()
   int y = m_player->m_y;
   static_cast<Tile*>(this->m_board[x][y])->make_current();
 }
+
+/* Check if puzzle is solved */
+bool Board::check_solved()
+{
+    for (int i = 0; i < m_width; ++i)
+    {
+        for (int j = 0; j < m_height; ++j) {
+            if (m_board[i][j]->repr() == 'x')
+                return false;
+        }
+    }
+    return true;
+}

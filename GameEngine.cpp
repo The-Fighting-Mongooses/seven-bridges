@@ -1,20 +1,31 @@
+#include <fstream>
+
 #include "GameEngine.h"
 #include "Scanner.h"
+
 using namespace std;
 
 void GameEngine::play()
 {
-    while ( 1 /* more puzzles */ ) {
-        m_scanner.read("Board1.txt");
+    string line;
+    ifstream board_names("BoardNames.txt");
 
-        while (/*m_board.check_solved() == */ false) {
-            char keypress = m_ui.get_key_press();
+    if (board_names.is_open()) {
+        while (getline(board_names, line)) {
+            m_scanner.read(line);
 
-            if (keypress == 'r')
-                m_board.reset();
+            m_ui.update(m_board);
+            while (m_board.check_solved() ==  false) {
+                char keypress = m_ui.get_key_press();
+
+                if (keypress == 'r')
+                    m_board.reset();
            
-            else 
-                m_board.update(keypress); 
+                else 
+                    m_board.update(keypress);
+
+                m_ui.update(m_board);
+            }
         }
     }
 }

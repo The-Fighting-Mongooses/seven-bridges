@@ -27,6 +27,9 @@ class Board
     Tile *m_start, *m_player;
     int m_height, m_width;
 
+    Location* make_adjacent_location(const char& input);
+    void move(const char& input, int& x, int& y);
+
   public:
     /* CONSTRUCTORS */
     Board();
@@ -41,8 +44,6 @@ class Board
 
     // Move the player based on user input.
     void update(const char& input);
-    Location* make_adjacent_location(const char& input);
-    void move(const char& input, int& x, int& y);
 
     // Determine wether the specified Location is in bounds of the board.
     bool includes(const Location& loc) const;
@@ -53,6 +54,9 @@ class Board
 
     // Reset the Board so the player can start over.
     void reset();
+
+    // Check if puzzle has been solved
+    bool check_solved();
 };
 
 #endif /*_BOARD_H_*/
