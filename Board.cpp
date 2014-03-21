@@ -15,32 +15,37 @@ Board::Board()
 /* Return the width and height of the board */
 int Board::get_width() const
 {
-    return m_width;
+    return this->m_width;
 }
 
 int Board::get_height() const
 {
-    return m_height;
+    return this->m_height;
 }
 
 /* Change the size of the board using the specified width and height. */
 void Board::resize_board(const int& x, const int& y)
 {
-  for (int i = 0; i < m_board.size(); ++i) {
-      for (int j = 0; j < m_board.at(i).size(); ++j) {
-          if (m_board.at(i).at(j) != nullptr) {
-              delete m_board.at(i).at(j);
+  // Delete the original board
+  for (int i = 0; i < this->m_board.size(); ++i) {
+      for (int j = 0; j < this->m_board.at(i).size(); ++j) {
+          if (this->m_board.at(i).at(j) != nullptr) {
+              delete this->m_board.at(i).at(j);
           }
       }
-      m_board.at(i).clear();
+      this->m_board.at(i).clear();
   }
-  m_board.clear();
+  
+  this->m_board.clear();
+  
+  // Make the new board.
   this->m_board.resize(x);
   for (int i = 0; i < x; ++i)
   {
     this->m_board[i].resize(y);
-    for (int j = 0; j < y; ++j) {
-        m_board.at(i).at(j) = nullptr;
+    for (int j = 0; j < y; ++j) 
+    {
+        this->m_board.at(i).at(j) = nullptr;
     }
   }
 
@@ -54,8 +59,9 @@ void Board::insert(Location* loc)
   int x = loc->m_x;
   int y = loc->m_y;
 
-  if (m_board.at(x).at(y) != nullptr) {
-      delete m_board.at(x).at(y);
+  // The location is already there.
+  if (this->m_board.at(x).at(y) != nullptr) {
+      delete this->m_board.at(x).at(y);
   }
 
   this->m_board.at(x).at(y) = loc;
@@ -64,6 +70,7 @@ void Board::insert(Location* loc)
   // Move the player here.
   if (loc->repr() == 'c')
   {
+    // Static cast informs the compiler that loc is indeed a Tile*.
     this->m_start = static_cast<Tile*>(loc);
     this->m_player = this->m_start;
   }
@@ -77,6 +84,7 @@ void Board::update(const char& input)
     return;
 
   // Flip the tile, and move the player to the new location.
+  // Static cast informs the compiler that loc is indeed a Tile*.
   this->m_player->flip();
   this->m_player = static_cast<Tile*>(loc);
   this->m_player->make_current();
@@ -115,7 +123,6 @@ void Board::move(const char& input, int& x, int& y)
   }
 }
 
-//Changed because using a Location to get a Location didn't make as much sense <dcp>
 /* Return the character representation of the specified locatioun. */
 char Board::contents_at(const int x, const int y) const
 {
@@ -134,7 +141,6 @@ bool Board::includes(const Location& loc) const
   return includes(x, y);
 }
 
-//Added overloaded includes for contents_at, which had to be changed <dcp>
 /* Determine if the specified Location is in bounds of the Board. */
 bool Board::includes(const int x, const int y) const
 {
@@ -163,16 +169,19 @@ void Board::reset()
 
   int x = m_player->m_x;
   int y = m_player->m_y;
+
+  // Static cast informs the compiler that this is indeed a Tile*.
   static_cast<Tile*>(this->m_board[x][y])->make_current();
 }
 
 /* Check if puzzle is solved */
 bool Board::check_solved()
 {
-    for (int i = 0; i < m_width; ++i)
+    for (int i = 0; i < this->m_width; ++i)
     {
-        for (int j = 0; j < m_height; ++j) {
-            if (m_board[i][j]->repr() == 'x')
+        for (int j = 0; j < this->m_height; ++j) 
+        {
+            if (this->m_board[i][j]->repr() == 'x')
                 return false;
         }
     }

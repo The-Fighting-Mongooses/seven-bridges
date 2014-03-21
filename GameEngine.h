@@ -1,3 +1,12 @@
+/********************************************************************************
+ * Defines the interface for a GameEngine class that will manage the gameplay.  *
+ *                                                                              *
+ * @author:       TheFightingMongooses                                          *
+ * @version:      1.0                                                           *
+ * @since:        2014-03-19                                                    *
+ *                                                                              *
+ ********************************************************************************/
+
 #ifndef _GAME_ENGINE_H_ 
 #define _GAME_ENGINE_H_
 
@@ -12,7 +21,7 @@ class GameEngine
     Board m_board;
     Scanner m_scanner;
     UserInterface m_ui;
-    
+
 
   public:
     /* CONSTRUCTORS */

@@ -1,3 +1,13 @@
+/********************************************************************************
+ * Defines the interface for an obstacle class.  These act as Locations which   *
+ * user is prohibited from traversing.                                          *
+ *                                                                              *
+ * @author:            TheFightingMongooses                                     *
+ * @version:           1.0                                                      *
+ * @since:             2014-03-20                                               *
+ *                                                                              *
+ ********************************************************************************/
+
 #ifndef _OBSTACLE_H_
 #define _OBSTACLE_H_
 

@@ -1,3 +1,13 @@
+/********************************************************************************
+ * Defines the interface for a Scanner class.  Used to read a Board represent-  *
+ * ation from a file and pass it to the GameEngine.                             *
+ *                                                                              *
+ * @author:         TheFightingMongooses                                        *
+ * @version:        1.0                                                         *
+ * @since:          2014-03-19                                                  *
+ *                                                                              *
+ ********************************************************************************/
+
 #ifndef _SCANNER_H_
 #define _SCANNER_H_
 
@@ -9,20 +19,22 @@ using namespace std;
 
 class Scanner
 {
-    public:
-        /*
-         * Store the board for future use
-         */
-        Scanner(Board &board);
+  private:
+    Board &m_board;
+  
+  public:
+    /* CONSTRUCTORS */
 
-        /*
-         * Feed the data from the saved board file into the actual board
-         */
-        bool read(string filename);
+    //Store the board for future use.
+    Scanner(Board &board);
 
-        ~Scanner();
+    ~Scanner();
 
-     private:
-         Board &m_board;
+    /* UTILITIES */
+
+    // Feed the data from the saved board file into the actual board
+    bool read(string filename);
+
+
 };
 #endif 

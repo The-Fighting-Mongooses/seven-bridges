@@ -1,11 +1,21 @@
 #include "Obstacle.h"
 #include "Location.h"
 
-Obstacle::Obstacle(int x, int y) : super(x, y) {}
-
-char Obstacle::repr() const
+/* Initialize this Obstacle using the parent constructor. */
+Obstacle::Obstacle(int x, int y) 
+  : super(x, y) 
 {
-    return '#';
+
 }
 
-void Obstacle::reset() { }
+/* Return a character representation of this Obstacle. */
+char Obstacle::repr() const
+{
+  return '#';
+}
+
+/* Pure virtual function.  Nothing to do here. */
+void Obstacle::reset() 
+{ 
+
+}

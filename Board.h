@@ -27,6 +27,8 @@ class Board
     Tile *m_start, *m_player;
     int m_height, m_width;
 
+    // Helper methods for update.  Get the Location in the direction the player
+    // wishes to move.
     Location* make_adjacent_location(const char& input);
     void move(const char& input, int& x, int& y);
 
