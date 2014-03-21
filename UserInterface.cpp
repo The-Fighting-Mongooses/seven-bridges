@@ -47,6 +47,9 @@ void UserInterface::update(const Board& board)
   int height = board.get_height();
 
   //TODO this isn't portable, so find a better way to clear screen
+  //Why doesn't "\e[2J" work?  Also, there is an "ANSI.h" file. :-)
+  //More importantly, does this matter? The intent is that the GUI
+  //is portable, right? <wth>
   cout << "\033[H\033[J" << endl;
 
   for (int y = 0; y < height; ++y) 
