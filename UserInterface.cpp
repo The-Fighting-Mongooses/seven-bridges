@@ -22,16 +22,16 @@ void UserInterface::pretty_print(char c)
 {
    switch(c) {
        case 'c':
-           cout << "\e[43m" << " " << endl;
+           cout << "\e[43m" << " ";
            break;
        case 'u':
-           cout << "\e[44m" << " " << endl;
+           cout << "\e[44m" << " ";
            break;
        case 'x':
-           cout << "\e[41m" << " " << endl;
+           cout << "\e[41m" << " ";
            break;
        case '#': 
-           cout << "\e[47m\e[30m" << "#" << endl;
+           cout << "\e[47m\e[30m" << "#";
    }
    cout << "\e[0m";
 }
