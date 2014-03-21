@@ -12,10 +12,11 @@ class GameEngine
     Board m_board;
     Scanner m_scanner;
     UserInterface m_ui;
+    
 
   public:
     /* CONSTRUCTORS */
-    GameEngine() {}
+    GameEngine();
 
     /* MAIN GAME LOOP */
     void play();
