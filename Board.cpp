@@ -1,4 +1,6 @@
 #include "Board.h"
+#include "Location.h"
+#include "Tile.h"
 
 /* Typical Constructor.  Initialize all of this Board's elements. */
 Board::Board()

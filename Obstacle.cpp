@@ -1,4 +1,5 @@
 #include "Obstacle.h"
+#include "Location.h"
 
 Obstacle::Obstacle(int x, int y) : super(x, y) {}
 

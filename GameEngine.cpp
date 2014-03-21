@@ -1,5 +1,6 @@
 #include "GameEngine.h"
 #include "Scanner.h"
+#include "UserInterface.h"
 using namespace std;
 
 void GameEngine::play()

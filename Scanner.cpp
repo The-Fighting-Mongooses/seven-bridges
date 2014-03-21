@@ -4,6 +4,8 @@
 #include "Scanner.h"
 #include "Board.h"
 #include "Location.h"
+#include "Obstacle.h"
+#include "Tile.h"
 //Probably include subclasses of Location
 
 using namespace std;
@@ -32,7 +34,7 @@ bool Scanner::read(string filename)
     ifstream file (filename);
     cin >> width >> height;
 
-    m_board.resize(width, height);
+    m_board.resize_board(width, height);
 
     while (getline (file,line))
     {
@@ -44,7 +46,7 @@ bool Scanner::read(string filename)
                     tmp = new Obstacle(i, lineno);
                 case 'c':
                     tmp = new Tile(i, lineno);
-                    tmp->make_current();
+                    static_cast<Tile*>(tmp)->make_current();
                     break;
                 default:
                     tmp = new Tile(i, lineno);

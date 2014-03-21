@@ -13,6 +13,8 @@ class UserInterface
     private:
         //Used to store the old terminal settings so we may restore them
         struct termios m_old_term_settings;
+
+        void pretty_print(char c);
     public:
         UserInterface();
         ~UserInterface();
@@ -25,6 +27,11 @@ class UserInterface
          * read from it.
          */
         void update(Board const & board);
+
+        /*
+         * Display a message to the user
+         */
+        void message(string const & msg);
 
         /*
          * The game engine should call this function when it is ready to
