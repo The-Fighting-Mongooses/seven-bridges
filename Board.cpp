@@ -12,6 +12,17 @@ Board::Board()
   this->m_player = this->m_start;
 }
 
+/* Return the width and height of the board */
+int Board::get_width() const
+{
+    return m_width;
+}
+
+int Board::get_height() const
+{
+    return m_height;
+}
+
 /* Change the size of the board using the specified width and height. */
 void Board::resize_board(const int& x, const int& y)
 {
@@ -137,4 +148,17 @@ void Board::reset()
   int x = m_player->m_x;
   int y = m_player->m_y;
   static_cast<Tile*>(this->m_board[x][y])->make_current();
+}
+
+/* Check if puzzle is solved */
+bool Board::check_solved()
+{
+    for (int i = 0; i < m_width; ++i)
+    {
+        for (int j = 0; j < m_height; ++j) {
+            if (m_board[i][j]->repr() == 'x')
+                return false;
+        }
+    }
+    return true;
 }
