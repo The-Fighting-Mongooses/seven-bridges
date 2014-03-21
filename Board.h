@@ -36,6 +36,10 @@ class Board
 
     /* UTILITIES */
 
+    // Return the width and height of board
+    int get_width() const;
+    int get_height() const;
+
     // Change the size of the Board.
     void resize_board(const int& x, const int& y);
 

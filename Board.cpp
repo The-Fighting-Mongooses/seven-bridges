@@ -10,6 +10,17 @@ Board::Board()
   this->m_player = this->m_start;
 }
 
+/* Return the width and height of the board */
+int Board::get_width() const
+{
+    return m_width;
+}
+
+int Board::get_height() const
+{
+    return m_height;
+}
+
 /* Change the size of the board using the specified width and height. */
 void Board::resize_board(const int& x, const int& y)
 {
