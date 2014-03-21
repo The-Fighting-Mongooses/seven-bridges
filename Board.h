@@ -44,7 +44,6 @@ class Board
     Location* make_adjacent_location(const char& input);
     void move(const char& input, int& x, int& y);
 
-
     // Determine wether the specified Location is in bounds of the board.
     bool includes(const Location& loc) const;
     bool includes(const int x, const int y) const;
