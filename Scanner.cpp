@@ -1,7 +1,6 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-
 #include "Scanner.h"
 #include "Board.h"
 #include "Location.h"
@@ -44,7 +43,6 @@ bool Scanner::read(Board board)
        else cout << "Unable to open";
     
        return false;
-    
 }
 
 Scanner::~Scanner()
