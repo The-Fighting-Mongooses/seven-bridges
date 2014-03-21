@@ -6,7 +6,7 @@ using namespace std;
 int main(int argc, char* argv[])
 {
   Tile t(3, 4);
-  Location l(3, 4);
+  //Location l(3, 4);
 
   t.print();
   cout << t.repr();
@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
   t.flip();
   cout << t.repr() << endl;
 
-  cout << t.is_equal_to(t) << " " << t.is_equal_to(l) << endl;
+  //cout << t.is_equal_to(t) << " " << t.is_equal_to(l) << endl;
 
   return 0;
 }

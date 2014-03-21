@@ -1,7 +1,6 @@
 #include <iostream>
 #include <termios.h>
-//Following include only needed for sleep, in the commented out testing code
-//#include <unistd.h>
+#include <unistd.h>
 
 #include "UserInterface.h"
 #include "Board.h"

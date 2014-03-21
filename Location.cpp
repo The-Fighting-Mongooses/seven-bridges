@@ -4,12 +4,13 @@
 
 #include "Location.h"
 
-/* Default consttructor.  Values may change to -1 later. */
+/* Default constructor.  Values may change to -1 later. */
+/* This really should not be necessary, and is possibly making life more difficult. <dcp>
 Location::Location()
 {
   this->m_x = 0;
   this->m_y = 0;
-}
+}*/
 
 /* Typical constructor.  Create a Location at a user defined point. */
 Location::Location(int x, int y)

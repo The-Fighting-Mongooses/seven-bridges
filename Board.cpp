@@ -24,18 +24,18 @@ void Board::resize_board(const int& x, const int& y)
 }
 
 /* Insert a Location into this Board. */
-void Board::insert(Location& loc)
+void Board::insert(Location* loc)
 {
-  int x = loc.m_x;
-  int y = loc.m_y;
+  int x = loc->m_x;
+  int y = loc->m_y;
 
   this->m_board[x][y] = loc;
 
   // If the location is marked as current, it is the staring location.
   // Move the player here.
-  if (loc.repr() == 'c')
+  if (loc->repr() == 'c')
   {
-    this->m_start = static_cast<Tile*>(&loc);
+    this->m_start = static_cast<Tile*>(loc);
     this->m_player = this->m_start;
   }
 }
@@ -43,7 +43,7 @@ void Board::insert(Location& loc)
 /* Move the player based on user input. */
 void Board::update(const char& input)
 {
-  Location* loc = &(this->make_adjacent_location(input));
+  Location* loc = this->make_adjacent_location(input);
   if (loc->repr() == '#' || loc->repr() == 'u')
     return;
 
@@ -54,7 +54,7 @@ void Board::update(const char& input)
 }
 
 /* Return the Location in the direction specified. */
-Location& Board::make_adjacent_location(const char& input)
+Location* Board::make_adjacent_location(const char& input)
 {
   int x = m_player->m_x;
   int y = m_player->m_y;
@@ -64,7 +64,7 @@ Location& Board::make_adjacent_location(const char& input)
 }
 
 /* Move the coordinates in the direction specified. */
-void move(const char& input, int& x, int& y)
+void Board::move(const char& input, int& x, int& y)
 {
   switch (input)
   {
@@ -86,15 +86,14 @@ void move(const char& input, int& x, int& y)
   }
 }
 
+//Changed because using a Location to get a Location didn't make as much sense <dcp>
 /* Return the character representation of the specified locatioun. */
-char Board::contents_at(const Location& loc) const
+char Board::contents_at(const int x, const int y) const
 {
-  int x = loc.m_x;
-  int y = loc.m_y;
 
-  if (!this->includes(loc))
+  if (!this->includes(x, y))
     return '\0';
-  else return this->m_board[x][y].repr();
+  else return this->m_board[x][y]->repr();
 }
 
 /* Determine if the specified Location is in bounds of the Board. */
@@ -103,6 +102,13 @@ bool Board::includes(const Location& loc) const
   int x = loc.m_x;
   int y = loc.m_y;
 
+  return includes(x, y);
+}
+
+//Added overloaded includes for contents_at, which had to be changed <dcp>
+/* Determine if the specified Location is in bounds of the Board. */
+bool Board::includes(const int x, const int y) const
+{
   if (x < 0 || x >= this->m_width)
     return false;
   if (y < 0 || y >= this->m_height)
@@ -119,7 +125,7 @@ void Board::reset()
   {
     for (int j = 0; j < this->m_height; ++j)
     {
-      this->m_board[i][j].reset();
+      this->m_board[i][j]->reset();
     }
   }
 
@@ -128,5 +134,5 @@ void Board::reset()
 
   int x = m_player->m_x;
   int y = m_player->m_y;
-  static_cast<Tile*>(&(this->m_board[x][y]))->make_current();
+  static_cast<Tile*>(this->m_board[x][y])->make_current();
 }

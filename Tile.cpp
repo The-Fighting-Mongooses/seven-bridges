@@ -17,14 +17,13 @@
 /* Default constructor.  May be removed later. */
 Tile::Tile()
 {
-  super();
   this->m_traversed = UNUSED;
 }
 
 /* Typical constructor.  Creates a Tile at a user defined point. */
 Tile::Tile(int x, int y)
+  : super(x, y)
 {
-  super(x, y);
   this->m_traversed = UNUSED;
 }
 
@@ -51,7 +50,7 @@ char Tile::repr() const
       return 'c';
     case USED:
       return 'u';
-    case UNUSED;
+    case UNUSED:
       return 'x';
   }
 }

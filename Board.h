@@ -23,7 +23,7 @@ class Board
   //friend class Location;
 
   private:	
-    vector<vector<Location> > m_board;
+    vector<vector<Location*>> m_board;
     Tile *m_start, *m_player;
     int m_height, m_width;
 
@@ -37,19 +37,20 @@ class Board
     void resize_board(const int& x, const int& y);
 
     // Insert a Location into this Board.
-    void insert(Location& loc);
+    void insert(Location* loc);
 
     // Move the player based on user input.
     void update(const char& input);
-    Location& make_adjacent_location(const char& input);
+    Location* make_adjacent_location(const char& input);
     void move(const char& input, int& x, int& y);
 
 
     // Determine wether the specified Location is in bounds of the board.
     bool includes(const Location& loc) const;
+    bool includes(const int x, const int y) const;
 
     // Returns the specified Location's character representation.
-    char contents_at(const Location& loc) const;
+    char contents_at(const int x, const int y) const;
 
     // Reset the Board so the player can start over.
     void reset();
