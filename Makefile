@@ -6,7 +6,7 @@ all: SevenBridges GameEngine.o Board.o Tile.o Location.o
 SevenBridges: SevenBridges.cpp GameEngine.o Board.o Tile.o Location.o Scanner.o UserInterface.o Obstacle.o
 	$(CC) $(CFLAGS) SevenBridges.cpp Scanner.o UserInterface.o GameEngine.o Board.o Tile.o Location.o Obstacle.o -o SevenBridges
 
-GameEngine.o: GameEngine.h GameEngine.cpp Scanner.h UserInterface.h
+GameEngine.o: GameEngine.h GameEngine.cpp Scanner.h UserInterface.h Board.h
 	$(CC) $(CFLAGS) -c GameEngine.cpp -o GameEngine.o
 
 Board.o: Board.h Board.cpp Location.h Tile.h

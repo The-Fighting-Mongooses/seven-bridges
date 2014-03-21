@@ -1,6 +1,7 @@
 #include <fstream>
 
 #include "GameEngine.h"
+#include "Board.h"
 #include "Scanner.h"
 #include "UserInterface.h"
 
