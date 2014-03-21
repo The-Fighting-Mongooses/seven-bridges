@@ -15,10 +15,11 @@
 #include "Location.h"
 
 /* Default constructor.  May be removed later. */
+/* No need for this, and causing problems <dcp>
 Tile::Tile()
 {
   this->m_traversed = UNUSED;
-}
+}*/
 
 /* Typical constructor.  Creates a Tile at a user defined point. */
 Tile::Tile(int x, int y)
