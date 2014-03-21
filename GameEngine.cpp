@@ -4,10 +4,10 @@ using namespace std;
 
 void GameEngine::play()
 {
-    while ( /* more puzzles */ ) {
-        m_scanner.read(m_board);
+    while ( 1 /* more puzzles */ ) {
+        m_scanner.read("Board1.txt");
 
-        while (m_board.check_solved() == false) {
+        while (/*m_board.check_solved() == */ false) {
             char keypress = m_ui.get_key_press();
 
             if (keypress == 'r')
@@ -15,10 +15,8 @@ void GameEngine::play()
            
             else 
                 m_board.update(keypress); 
+        }
     }
 }
 
-GameEngine::GameEngine() : m_scanner("Board1.txt")
-{
-    m_ui();
-}
+GameEngine::GameEngine() : m_scanner(m_board) { }

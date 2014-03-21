@@ -20,19 +20,17 @@ string line;
    int y;
 };*/
 
-Scanner::Scanner(string filename) : file("Board1.txt")
+Scanner::Scanner(Board &board) : m_board(board)
 {
-    //TODO open the file <dcp>
-    //file.open ("Board1.txt");
   
 }
 
-bool Scanner::read(Board board)
+bool Scanner::read(string filename)
 {
     //TODO read from the file and use functions of Board to feed it in
     //return false;
 
-    //ifstream file ("Board1.txt");
+    ifstream file (filename);
        if (file.is_open())
        {
           while (getline (file,line))
@@ -47,6 +45,4 @@ bool Scanner::read(Board board)
 
 Scanner::~Scanner()
 {
-    //TODO close the file if open
-    file.close();
 }

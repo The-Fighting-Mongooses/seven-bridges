@@ -11,21 +11,18 @@ class Scanner
 {
     public:
         /*
-         * Create a scanner to read a board from the passed in file name
+         * Store the board for future use
          */
-        Scanner(string filename);
+        Scanner(Board &board);
 
         /*
          * Feed the data from the saved board file into the actual board
          */
-        bool read(Board board);
+        bool read(string filename);
 
-        /*
-         * Close any open files
-         */
         ~Scanner();
 
      private:
-         ifstream file;
+         Board &m_board;
 };
 #endif 
