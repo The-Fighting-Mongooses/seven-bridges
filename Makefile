@@ -15,6 +15,9 @@ Board.o: Board.h Board.cpp
 Tile.o: Tile.h Tile.cpp
 	$(CC) $(CFLAGS) -c Tile.cpp -o Tile.o
 
+Obstacle.o: Obstacle.h Obstacle.cpp
+	$(CC) $(CFLAGS) -c Obstacle.cpp -o Obstacle.o
+
 Location.o: Location.h Location.cpp
 	$(CC) $(CFLAGS) -c Location.cpp -o Location.o
 
