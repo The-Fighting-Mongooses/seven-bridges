@@ -1,6 +1,9 @@
 #include "Obstacle.h"
 
-Obstacle::Obstacle(int x, int y) : Location(x, y) { }
+Obstacle::Obstacle(int x, int y)
+{
+  super(x, y);
+}
 
 char Obstacle::repr() const
 {
