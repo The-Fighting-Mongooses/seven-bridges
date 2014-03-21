@@ -42,8 +42,8 @@ bool Scanner::read(string filename)
             Location *tmp;
             switch (line.at(i)) {
                 case '#':
-                    break;
                     tmp = new Obstacle(i, lineno);
+                    break;
                 case 'c':
                     tmp = new Tile(i, lineno);
                     static_cast<Tile*>(tmp)->make_current();
