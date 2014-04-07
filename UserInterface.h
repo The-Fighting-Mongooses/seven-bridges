@@ -14,7 +14,7 @@
 
 #include <iostream>
 #include <termios.h>
-
+#include <SDL2/SDL.h>
 #include "Board.h"
 
 using namespace std;
@@ -22,6 +22,9 @@ using namespace std;
 class UserInterface
 {
   private:
+    SDL_Window* m_window; // The main window for the GUI.
+    char m_hints[6]; // Imagine this would be useful, but feel free to change. <wth>
+
     //Used to store the old terminal settings so we may restore them
     struct termios m_old_term_settings;
     void pretty_print(char c);

@@ -63,10 +63,15 @@ void UserInterface::update(const Board& board)
 }
 
 /* Prompt the user to advance to the next puzzle or print a message. */
-void UserInterface::message(const string& msg)
+void UserInterface::message(const string& msg, const string& hint)
 {
-  //TODO
-  //Do we want this to be press any key to continue? Or what?
+  window = this->m_window;
+  // Wrap SDL_ShowSimpleMessageBox
+  SDL_ShowSimpleMessageBox(
+      SDL_MESSAGEBOX_INFORMATION,
+      hint,
+      msg,
+      window);
 }
 
 /* Get user input. */
