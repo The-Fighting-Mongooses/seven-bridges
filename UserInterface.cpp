@@ -43,8 +43,11 @@ void UserInterface::pretty_print(char c)
 /* Update the Board representation. */
 void UserInterface::update(const Board& board)
 {
+  static int old_width = -1;
+  static int old_height = -1;
   int width = board.get_width();
   int height = board.get_height();
+
 
   //TODO this isn't portable, so find a better way to clear screen
   //Why doesn't "\e[2J" work?  Also, there is an "ANSI.h" file. :-)
@@ -55,7 +58,16 @@ void UserInterface::update(const Board& board)
   //that does not reposition the cursor in the upper left. And it doesn't matter
   //that much, or this would have been done by now. And your ANSI.h file was
   //complicated. It was faster to just do this. <dcp>
+  /* cli
   cout << "\033[H\033[J" << endl;
+  */
+
+  //Only resize if necessary
+  if (width != old_width || height != old_height) {
+      old_width = width;
+      old_height = height;
+      SDL_SetWindowSize(m_window, width * 40, height * 40);
+  }
 
   for (int y = 0; y < height; ++y) 
   {
