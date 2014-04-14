@@ -26,7 +26,6 @@ class UserInterface
     SDL_Window* m_window; // The main window for the GUI.
     SDL_Texture *black_tex, *blue_tex, *red_tex, *green_tex;
     SDL_Renderer *ren;
-    deque key_queue;
     char m_hints[6]; // Imagine this would be useful, but feel free to change. <wth>
 
 
