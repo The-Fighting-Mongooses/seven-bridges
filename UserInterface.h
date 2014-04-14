@@ -30,7 +30,7 @@ class UserInterface
 
 
     //Used to store the old terminal settings so we may restore them
-    struct termios m_old_term_settings;
+    //struct termios m_old_term_settings;
 
     //Prints a grid space corresponding to the character provided
     void pretty_print(char c, int x, int y);

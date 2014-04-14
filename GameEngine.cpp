@@ -33,7 +33,8 @@ void GameEngine::play()
 
         if (keypress == 'r')
           this->m_board.reset();
-
+        else if (keypress == 'q')
+          goto done;
         else 
           this->m_board.update(keypress);
 
@@ -41,6 +42,8 @@ void GameEngine::play()
       }
     }
 
-    board_names.close();
+    done:
+      board_names.close();
+      SDL_Quit();
   }
 }
