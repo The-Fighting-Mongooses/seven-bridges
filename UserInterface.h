@@ -1,13 +1,13 @@
-/********************************************************************************
- * Defines the interface for a UserInterface class.  Allows user interaction    *
- * with the game via the terminal.  Grabs the user's terminal settings and      *
- * turns off buffering so they may play the game without needing to confirm     *
- * their actions via the enter key.                                             *
- *                                                                              *
- * @author:       TheFightingMongooses                                          *
- * @version:      1.0                                                           *
- * @since:        2014-03-19                                                    *
- *                                                                              *
+/*******************************************************************************
+ * Defines the interface for a UserInterface class.  Allows user interaction   *
+ * with the game via the terminal.  Grabs the user's terminal settings and     *
+ * turns off buffering so they may play the game without needing to confirm    *
+ * their actions via the enter key.                                            *
+ *                                                                             *
+ * @author:       TheFightingMongooses                                         *
+ * @version:      1.0                                                          *
+ * @since:        2014-03-19                                                   *
+ *                                                                             *
  ********************************************************************************/
 #ifndef _USERINTERFACE_H_
 #define _USERINTERFACE_H_
