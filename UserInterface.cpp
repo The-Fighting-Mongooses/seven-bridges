@@ -71,14 +71,31 @@ void UserInterface::pretty_print(char c)
 /* Update the Board representation. */
 void UserInterface::update(const Board& board)
 {
+  static int old_width = -1;
+  static int old_height = -1;
   int width = board.get_width();
   int height = board.get_height();
+
 
   //TODO this isn't portable, so find a better way to clear screen
   //Why doesn't "\e[2J" work?  Also, there is an "ANSI.h" file. :-)
   //More importantly, does this matter? The intent is that the GUI
   //is portable, right? <wth>
-  //cout << "\033[H\033[J" << endl;
+  //
+  //Because that only works on systems that interpret ANSI escape codes. Also,
+  //that does not reposition the cursor in the upper left. And it doesn't matter
+  //that much, or this would have been done by now. And your ANSI.h file was
+  //complicated. It was faster to just do this. <dcp>
+  /* cli
+  cout << "\033[H\033[J" << endl;
+  */
+
+  //Only resize if necessary
+  if (width != old_width || height != old_height) {
+      old_width = width;
+      old_height = height;
+      SDL_SetWindowSize(m_window, width * 40, height * 40);
+  }
 
   for (int y = 0; y < height; ++y) 
   {
@@ -105,34 +122,54 @@ void UserInterface::message(const string& msg, const string& hint)
 /* Get user input. */
 char UserInterface::get_key_press()
 {
-  while(1) 
-  {
-    char c;
-    int error = read(0, &c, sizeof(char));
-    if (error < 0) 
+    while(1) 
     {
-      perror("read");
+        SDL_Event *e;
+        if (SDL_PollEvent(e) == 0) {
+            continue;
+        } else if (e->type != SDL_KEYDOWN) {
+            continue;
+        }
+        switch (e->keysym->scancode) {
+            case SDL_SCANCODE_W:
+                return 'w';
+            case SDL_SCANCODE_A:
+                return 'a';
+            case SDL_SCANCODE_S:
+                return 's';
+            case SDL_SCANCODE_D:
+                return 'd';
+        }
     }
 
-    switch (c) 
-    {
-      case 'w':
-      case 'W':
-        return 'w';
-      case 'a':
-      case 'A':
-        return 'a';
-      case 's':
-      case 'S':
-        return 's';
-      case 'd':
-      case 'D':
-        return 'd';
-      case 'r':
-      case 'R':
-        return 'r';
+/* cli
+        char c;
+        int error = read(0, &c, sizeof(char));
+        if (error < 0) 
+        {
+            perror("read");
+        }
+
+        switch (c) 
+        {
+            case 'w':
+            case 'W':
+                return 'w';
+            case 'a':
+            case 'A':
+                return 'a';
+            case 's':
+            case 'S':
+                return 's';
+            case 'd':
+            case 'D':
+                return 'd';
+            case 'r':
+            case 'R':
+                return 'r';
+        }
     }
-  }
+    */
 }
 
 /* Print SDL errors */
