@@ -105,7 +105,7 @@ void UserInterface::update(const Board& board)
     {
       pretty_print(board.contents_at(x, y), x, y);
     }
-    cout << endl;
+    //cout << endl;
   }
   SDL_RenderPresent(ren);	
 }

@@ -22,6 +22,7 @@ class GameEngine
     Scanner m_scanner;
     UserInterface m_ui;
 
+    string m_hints[6];
 
   public:
     /* CONSTRUCTORS */

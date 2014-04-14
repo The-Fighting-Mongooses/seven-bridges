@@ -11,7 +11,8 @@ using namespace std;
 GameEngine::GameEngine() 
   : m_scanner(this->m_board) 
 { 
-
+  for (int i = 0; i < 6; ++i)
+    m_hints[i] = "~";
 }
 
 /* Main Game Loop */
@@ -22,6 +23,7 @@ void GameEngine::play()
 
   if (board_names.is_open()) 
   {
+    int i = 0;
     while (getline(board_names, line)) 
     {
       this->m_scanner.read(line);
@@ -40,6 +42,9 @@ void GameEngine::play()
 
         this->m_ui.update(m_board);
       }
+      
+      this->m_ui.message("Congratulations!  You solved the puzzle", m_hints[i]);
+      ++i;
     }
 
     done:
