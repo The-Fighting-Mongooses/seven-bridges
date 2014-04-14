@@ -82,34 +82,54 @@ void UserInterface::message(const string& msg, const string& hint)
 /* Get user input. */
 char UserInterface::get_key_press()
 {
-  while(1) 
-  {
-    char c;
-    int error = read(0, &c, sizeof(char));
-    if (error < 0) 
+    while(1) 
     {
-      perror("read");
+        SDL_Event *e;
+        if (SDL_PollEvent(e) == 0) {
+            continue;
+        } else if (e->type != SDL_KEYDOWN) {
+            continue;
+        }
+        switch (e->keysym->scancode) {
+            case SDL_SCANCODE_W:
+                return 'w';
+            case SDL_SCANCODE_A:
+                return 'a';
+            case SDL_SCANCODE_S:
+                return 's';
+            case SDL_SCANCODE_D:
+                return 'd';
+        }
     }
 
-    switch (c) 
-    {
-      case 'w':
-      case 'W':
-        return 'w';
-      case 'a':
-      case 'A':
-        return 'a';
-      case 's':
-      case 'S':
-        return 's';
-      case 'd':
-      case 'D':
-        return 'd';
-      case 'r':
-      case 'R':
-        return 'r';
+/* cli
+        char c;
+        int error = read(0, &c, sizeof(char));
+        if (error < 0) 
+        {
+            perror("read");
+        }
+
+        switch (c) 
+        {
+            case 'w':
+            case 'W':
+                return 'w';
+            case 'a':
+            case 'A':
+                return 'a';
+            case 's':
+            case 'S':
+                return 's';
+            case 'd':
+            case 'D':
+                return 'd';
+            case 'r':
+            case 'R':
+                return 'r';
+        }
     }
-  }
+    */
 }
 
 /* Restore original terminal settings. */
