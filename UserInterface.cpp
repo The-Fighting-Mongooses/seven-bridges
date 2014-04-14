@@ -50,6 +50,11 @@ void UserInterface::update(const Board& board)
   //Why doesn't "\e[2J" work?  Also, there is an "ANSI.h" file. :-)
   //More importantly, does this matter? The intent is that the GUI
   //is portable, right? <wth>
+  //
+  //Because that only works on systems that interpret ANSI escape codes. Also,
+  //that does not reposition the cursor in the upper left. And it doesn't matter
+  //that much, or this would have been done by now. And your ANSI.h file was
+  //complicated. It was faster to just do this. <dcp>
   cout << "\033[H\033[J" << endl;
 
   for (int y = 0; y < height; ++y) 
