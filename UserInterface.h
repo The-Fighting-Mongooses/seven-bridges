@@ -23,7 +23,7 @@ using namespace std;
 class UserInterface
 {
   private:
-    SDL_Window* m_window; // The main window for the GUI.
+    SDL_Window *m_window; // The main window for the GUI.
     SDL_Texture *black_tex, *blue_tex, *red_tex, *green_tex;
     SDL_Renderer *ren;
     char m_hints[6]; // Imagine this would be useful, but feel free to change. <wth>
@@ -33,7 +33,7 @@ class UserInterface
     struct termios m_old_term_settings;
 
     //Prints a grid space corresponding to the character provided
-    void pretty_print(char c);
+    void pretty_print(char c, int x, int y);
 
     void print_sdl_error(ostream & os, const string & msg);
     SDL_Texture * load_texture(const string & file);
@@ -53,7 +53,7 @@ class UserInterface
     void update(const Board & board);
 
     // Display a message to the user
-    void message(const string & msg);
+    void message(const string & msg, const string & hint);
 
     // The game engine should call this function when it is ready to
     // accept user input.  Returns 'w', 'a', 's', or 'd' (lowercase 

@@ -2,6 +2,7 @@
 #include <iostream>
 #include <termios.h>
 #include <unistd.h>
+#include <SDL2/SDL.h>
 
 #include "UserInterface.h"
 #include "Board.h"
@@ -21,49 +22,50 @@ UserInterface::UserInterface()
   tcsetattr(0, TCSANOW, &term_settings);
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
-		log_sdl_error(cout, "SDL_Init");
-		return 1;
+		print_sdl_error(cout, "SDL_Init");
+		exit(EXIT_FAILURE);
 	}
 
-	SDL_Window *m_window = SDL_CreateWindow("Seven Bridges", 0, 0, SCREEN_WIDTH,			SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	m_window = SDL_CreateWindow("Seven Bridges", 100, 100, 0, 0, 
+			SDL_WINDOW_SHOWN);
 	if (m_window == nullptr) {
-		log_sdl_error(cout, "CreateWindow");
-		return 2;
+		print_sdl_error(cout, "CreateWindow");
+		exit(EXIT_FAILURE);
 	}
 
-	SDL_Renderer *ren = SDL_CreatRenderer(m_window, -1,
+	ren = SDL_CreateRenderer(m_window, -1,
 			SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (renderer == nullptr) {
-		log_sdl_error(cout, "CreateRenderer");
-		return 3;
+	if (ren == nullptr) {
+		print_sdl_error(cout, "CreateRenderer");
+		exit(EXIT_FAILURE);
 	}
 
-	black_tex = load_tex("black.bmp");
-	blue_tex = load_tex("blue.bmp");
-	green_tex = load_tex("green.bmp");
-	red_tex = load_tex("red.bmp");
+	black_tex = load_texture("black.bmp");
+	blue_tex = load_texture("blue.bmp");
+	green_tex = load_texture("green.bmp");
+	red_tex = load_texture("red.bmp");
 }
 
 /* Print the Location. */
-void UserInterface::pretty_print(char c)
+void UserInterface::pretty_print(char c, int x, int y)
 {
 	switch(c) 
 	{
 		case 'c':
 			//cout << ANSI::yellow_bg << " ";
-			blit(green_tex, 40, 40);
+			blit(green_tex, 40*x, 40*y);
 			break;
 		case 'u':
 			//cout << ANSI::blue_bg << " ";
-			blit(blue_tex, 40, 40);
+			blit(blue_tex, 40*x, 40*y);
 			break;
 		case 'x':
 			//cout << ANSI::red_bg << " ";
-			blit(red_tex, 40, 40);
+			blit(red_tex, 40*x, 40*y);
 			break;
 		case '#': 
 			//cout << ANSI::black_fg << ANSI::white_bg << "#";
-			blit(black_tex, 40, 40);
+			blit(black_tex, 40*x, 40*y);
 	}
 	//cout << ANSI::normal;
 }
@@ -101,22 +103,22 @@ void UserInterface::update(const Board& board)
   {
     for (int x = 0; x < width; ++x) 
     {
-      pretty_print(board.contents_at(x, y));
+      pretty_print(board.contents_at(x, y), x, y);
     }
     cout << endl;
   }
+	SDL_RenderPresent(ren);	
 }
 
 /* Prompt the user to advance to the next puzzle or print a message. */
 void UserInterface::message(const string& msg, const string& hint)
 {
-  window = this->m_window;
   // Wrap SDL_ShowSimpleMessageBox
   SDL_ShowSimpleMessageBox(
       SDL_MESSAGEBOX_INFORMATION,
-      hint,
-      msg,
-      window);
+      hint.c_str(),
+      msg.c_str(),
+      m_window);
 }
 
 /* Get user input. */
@@ -124,13 +126,13 @@ char UserInterface::get_key_press()
 {
     while(1) 
     {
-        SDL_Event *e;
-        if (SDL_PollEvent(e) == 0) {
+        SDL_Event e;
+        if (SDL_PollEvent(&e) == 0) {
             continue;
-        } else if (e->type != SDL_KEYDOWN) {
+        } else if (e.type != SDL_KEYDOWN) {
             continue;
         }
-        switch (e->keysym->scancode) {
+        switch (e.key.keysym.scancode) {
             case SDL_SCANCODE_W:
                 return 'w';
             case SDL_SCANCODE_A:
@@ -139,6 +141,8 @@ char UserInterface::get_key_press()
                 return 's';
             case SDL_SCANCODE_D:
                 return 'd';
+			default:
+				continue;
         }
     }
 
@@ -173,13 +177,13 @@ char UserInterface::get_key_press()
 }
 
 /* Print SDL errors */
-void print_sdl_error(ostream &os, const string msg)
+void UserInterface::print_sdl_error(ostream &os, const string &msg)
 {
 	os << msg << " error: " << SDL_GetError() << endl;
 }
 
 /* Load BMP image into a texture */
-SDL_Texture* load_texture(const string &file)
+SDL_Texture* UserInterface::load_texture(const string &file)
 {
 	SDL_Texture *texture = nullptr;
 
@@ -191,12 +195,12 @@ SDL_Texture* load_texture(const string &file)
 		SDL_FreeSurface(loaded_image);
 
 		if (texture == nullptr) {
-			log_sdl_error(cout, "CreateTextureFromSurface");
+			print_sdl_error(cout, "CreateTextureFromSurface");
 			exit(EXIT_FAILURE);
 		}
 	}
 	else {
-		log_sdl_error(cout, "LoadBMP");
+		print_sdl_error(cout, "LoadBMP");
 		exit(EXIT_FAILURE);
 	}
 
@@ -204,7 +208,7 @@ SDL_Texture* load_texture(const string &file)
 }
 
 /* Draw texture to renderer at position x, y */
-void blit(SDL_Texture *tex, int x, int y)
+void UserInterface::blit(SDL_Texture *tex, int x, int y)
 {
 	SDL_Rect destination;
 	destination.x = x;
