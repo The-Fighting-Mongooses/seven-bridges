@@ -97,7 +97,10 @@ void UserInterface::update(const Board& board)
     old_width = width;
     old_height = height;
     SDL_SetWindowSize(m_window, width * 40, height * 40);
+  //This fixes the broken rednering when resizing. No idea how.
+    sleep(1);
   }
+
 
   for (int y = 0; y < height; ++y) 
   {
