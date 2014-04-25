@@ -22,7 +22,8 @@ class GameEngine
     Scanner m_scanner;
     UserInterface m_ui;
 
-    string m_hints[6];
+    //http://bit.ly/1i2Oy0P
+    string m_hints[6] = {"i", "2", "O", "y", "0", "P"};
 
   public:
     /* CONSTRUCTORS */

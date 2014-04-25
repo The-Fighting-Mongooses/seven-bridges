@@ -11,8 +11,13 @@ using namespace std;
 GameEngine::GameEngine() 
   : m_scanner(this->m_board) 
 { 
-  for (int i = 0; i < 6; ++i)
-    m_hints[i] = "~";
+    //http://bit.ly/1i2Oy0P
+    m_hints[0] = "i";
+    m_hints[1] = "2";
+    m_hints[2] = "O";
+    m_hints[3] = "y";
+    m_hints[4] = "0";
+    m_hints[5] = "P";
 }
 
 /* Main Game Loop */
